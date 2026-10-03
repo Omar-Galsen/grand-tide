@@ -8,14 +8,6 @@ const enemies=[
   {x:880,y:470,r:17,hp:45,maxHp:45,speed:72,name:"Port Pirate",boss:false,alive:true,hitCd:0}
 ];
 const boat={x:1090,y:555,w:110,h:56};
-const art={
-  map:Object.assign(new Image(),{src:"assets/maps/windward_island.svg"}),
-  player:Object.assign(new Image(),{src:"assets/player/pirate_player.svg"}),
-  pirate:Object.assign(new Image(),{src:"assets/enemies/port_pirate.svg"}),
-  boss:Object.assign(new Image(),{src:"assets/enemies/captain_redwake.svg"}),
-  ship:Object.assign(new Image(),{src:"assets/ships/player_ship.svg"}),
-  enemyShip:Object.assign(new Image(),{src:"assets/ships/enemy_ship.svg"})
-};
 
 function resize(){const rect=canvas.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);canvas.width=Math.round(rect.width*d);canvas.height=Math.round(rect.width*9/16*d);ctx.setTransform(canvas.width/1280,0,0,canvas.height/720,0,0)}
 addEventListener("resize",resize);resize();
@@ -71,13 +63,16 @@ function update(dt){
 function diamond(x,y,w,h,fill,stroke){ctx.beginPath();ctx.moveTo(x,y-h/2);ctx.lineTo(x+w/2,y);ctx.lineTo(x,y+h/2);ctx.lineTo(x-w/2,y);ctx.closePath();ctx.fillStyle=fill;ctx.fill();if(stroke){ctx.strokeStyle=stroke;ctx.stroke()}}
 function draw(){
   ctx.clearRect(0,0,1280,720);
-  if(art.map.complete&&art.map.naturalWidth)ctx.drawImage(art.map,0,0,1280,720);
-  else{ctx.fillStyle="#174e61";ctx.fillRect(0,0,1280,720);diamond(640,385,1090,560,"#c7a969","#dbc889")}
-  if(art.ship.complete&&art.ship.naturalWidth)ctx.drawImage(art.ship,boat.x-35,boat.y-85,180,123);
-  else{ctx.fillStyle="#583b27";ctx.fillRect(boat.x,boat.y,boat.w,boat.h)}
+  ctx.fillStyle="#174e61";ctx.fillRect(0,0,1280,720);
+  diamond(640,385,1090,560,"#c7a969","#dbc889");
+  ctx.fillStyle="#6e8f55";ctx.beginPath();ctx.ellipse(640,350,390,190,0,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle="#806545";ctx.fillRect(330,225,620,58);ctx.fillStyle="#d5bb82";for(let i=0;i<9;i++)ctx.fillRect(345+i*72,235,52,38);
+  ctx.fillStyle="#263b42";ctx.fillRect(570,150,140,80);ctx.fillStyle="#8a342e";ctx.fillRect(620,105,40,48);
+  for(let i=0;i<14;i++){const x=180+(i*83)%930,y=160+((i*57)%390);ctx.fillStyle="#3b692f";ctx.beginPath();ctx.arc(x,y,16,0,7);ctx.fill();ctx.fillStyle="#674733";ctx.fillRect(x-3,y+12,6,20)}
+  ctx.fillStyle="#583b27";ctx.fillRect(boat.x,boat.y,boat.w,boat.h);ctx.fillStyle="#ead7a5";ctx.beginPath();ctx.moveTo(boat.x+55,boat.y-72);ctx.lineTo(boat.x+55,boat.y+10);ctx.lineTo(boat.x+105,boat.y-5);ctx.closePath();ctx.fill();
   ctx.fillStyle="#f2d66b";ctx.font="bold 14px system-ui";ctx.fillText("BOAT BATTLE",boat.x-4,boat.y-82);
-  enemies.forEach(e=>{if(!e.alive)return;const im=e.boss?art.boss:art.pirate;const s=e.boss?76:58;if(im.complete&&im.naturalWidth)ctx.drawImage(im,e.x-s/2,e.y-s*.72,s,s);else{ctx.fillStyle=e.boss?"#7d1f26":"#452b2b";ctx.beginPath();ctx.arc(e.x,e.y,e.r,0,7);ctx.fill()}ctx.fillStyle="#eee";ctx.font="12px system-ui";ctx.textAlign="center";ctx.fillText(e.name,e.x,e.y-e.r-28);ctx.fillStyle="#321818";ctx.fillRect(e.x-28,e.y-e.r-20,56,5);ctx.fillStyle="#d95a55";ctx.fillRect(e.x-28,e.y-e.r-20,56*(e.hp/e.maxHp),5)});
-  ctx.save();ctx.translate(player.x,player.y);if(player.invuln>0)ctx.globalAlpha=.62;if(art.player.complete&&art.player.naturalWidth)ctx.drawImage(art.player,-34,-52,68,68);else{ctx.fillStyle="#1e5d8b";ctx.beginPath();ctx.arc(0,0,player.r,0,7);ctx.fill()}ctx.globalAlpha=1;if(player.attackCd>.18){ctx.strokeStyle="#f8e6a7";ctx.lineWidth=7;ctx.beginPath();ctx.arc(0,0,48,-1.2,1.2);ctx.stroke()}ctx.restore();
+  enemies.forEach(e=>{if(!e.alive)return;ctx.fillStyle=e.boss?"#7d1f26":"#452b2b";ctx.beginPath();ctx.arc(e.x,e.y,e.r,0,7);ctx.fill();ctx.fillStyle="#eee";ctx.font="12px system-ui";ctx.textAlign="center";ctx.fillText(e.name,e.x,e.y-e.r-17);ctx.fillStyle="#321818";ctx.fillRect(e.x-28,e.y-e.r-11,56,5);ctx.fillStyle="#d95a55";ctx.fillRect(e.x-28,e.y-e.r-11,56*(e.hp/e.maxHp),5)});
+  ctx.save();ctx.translate(player.x,player.y);ctx.fillStyle=player.invuln>0?"#fff1ad":"#1e5d8b";ctx.beginPath();ctx.arc(0,0,player.r,0,7);ctx.fill();ctx.strokeStyle="#d9edf7";ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(player.dirX*10,player.dirY*10);ctx.lineTo(player.dirX*31,player.dirY*31);ctx.stroke();if(player.attackCd>.18){ctx.strokeStyle="#f8e6a7";ctx.lineWidth=7;ctx.beginPath();ctx.arc(0,0,48,-1.2,1.2);ctx.stroke()}ctx.restore();
   ctx.textAlign="left";
   if(paused){ctx.fillStyle="rgba(0,0,0,.55)";ctx.fillRect(0,0,1280,720);ctx.fillStyle="#fff";ctx.font="bold 42px system-ui";ctx.textAlign="center";ctx.fillText("PAUSED",640,360)}
 }
