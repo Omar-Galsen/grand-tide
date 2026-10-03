@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
+  <title>Grand Tide</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="game-shell">
+    <header class="topbar">
+      <div>
+        <strong>⚓ GRAND TIDE</strong>
+        <span>Chapter 01 · Windward Island</span>
+      </div>
+      <button id="pauseBtn">Ⅱ Pause</button>
+    </header>
+
+    <section class="hud">
+      <div class="card">
+        <b>⚔ Rookie Captain</b>
+        <span id="gold">0 gold</span>
+        <div class="bar"><div id="hpBar"></div></div>
+        <small id="hpText">100 / 100 HP</small>
+      </div>
+      <div class="card objective">
+        <b>THE FIRST VOYAGE</b>
+        <span>Conquer the island</span>
+        <small id="objectiveText">Defeat the 3 port pirates. 0 / 3 scouts defeated</small>
+      </div>
+    </section>
+
+    <canvas id="game" width="1280" height="720"></canvas>
+
+    <div id="message" class="message">Windward Island · Defeat 3 scouts, then challenge Captain Redwake.</div>
+
+    <section class="controls">
+      <div class="dpad">
+        <button data-key="ArrowUp">▲</button>
+        <div>
+          <button data-key="ArrowLeft">◀</button>
+          <button data-key="ArrowDown">▼</button>
+          <button data-key="ArrowRight">▶</button>
+        </div>
+      </div>
+      <div class="actions">
+        <button data-key="KeyJ">J<br><small>Slash</small></button>
+        <button data-key="Space">⤨<br><small>Roll</small></button>
+        <button data-key="KeyE">E<br><small>Interact</small></button>
+      </div>
+    </section>
+
+    <footer>WASD / Arrows Move · J Slash · Space Roll · E Interact</footer>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
