@@ -54,3 +54,7 @@ Eight original synthesized gravel WAV variations play with player walking distan
 ## Sword audio
 
 Four synthesized slash WAV variations in `assets/audio/sword/` play once per accepted J/mobile sword attack, avoiding consecutive repeats. Cancelling into a roll, pausing, or leaving the tab stops the sound. `sword-audio.js` preloads the clips; playback errors do not block combat.
+
+## Background music
+
+The soothing pirate theme with soft drums loops continuously across island exploration and boat battles. It starts after the first key press or tap, at 35% gain. The Music button toggles it independently of sound effects and remembers the setting. Switching away suspends playback; returning resumes from the same position. `music.js` uses a decoded Web Audio buffer for continuous looping; the compressed Ogg asset is in `assets/audio/music/`.
