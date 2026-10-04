@@ -4,7 +4,7 @@ const boardingTerrain={areas:[[[470,170],[1050,170],[1200,850],[330,850]]],block
 function startBoarding(){
  if(boarding||!canBoardShip())return;
  boarding={player,enemies,particles,over,victoryPending,toastTime,slash,shake};
- player={x:770,y:730,hp:100,sp:100,dir:1,face:{x:0,y:-1},inv:1,cool:0,roll:0,rollDir:1,rollFace:{x:0,y:-1},walk:0,gold:0,attack:0,attackHit:false,attackDir:1};
+ player={x:770,y:730,hp:100,sp:100,dir:1,face:{x:0,y:-1},inv:1,cool:0,roll:0,rollDir:1,rollFace:{x:0,y:-1},walk:0,gold:0,attack:0,attackHit:false,attackDir:1,wind:0,windCool:0,windPulse:0};
  enemies=[[605,530,false],[930,480,false],[770,330,true]].map(([x,y,boss])=>({x,y,home:{x,y},hp:boss?240:70,max:boss?240:70,boss,spriteType:boss?'guard':'pirate',dir:0,attack:0,attackHit:false,attackDir:0,cool:1.3,flash:0,walk:0}));
  particles=[];slash=0;shake=0;paused=false;over=false;victoryPending=false;keys.clear();navalKeys.clear();navalHeld=false;resetNavalStick();joyEnd();
  document.getElementById('game').classList.add('boarding');document.getElementById('naval').hidden=true;document.getElementById('overlay').hidden=true;
