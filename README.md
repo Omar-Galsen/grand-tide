@@ -46,3 +46,7 @@ Island progress is stored in the browser on the current device. This is a browse
 ## Files
 
 `index.html`, `style.css`, `game.js`, `terrain.js`, `campaign.js`, `naval.js`, `boarding.js`, and `assets/` form the complete game. The artwork in this repository is the artwork used by this version.
+
+## Footstep audio
+
+Eight original synthesized gravel WAV variations play with player walking distance (two steps per walk cycle), without consecutive sample repeats. Audio unlocks on a key press or tap. Footsteps stop while idle, blocked, rolling, attacking, casting, paused, or sailing; walking during boarding also uses these gravel samples. Files are in `assets/audio/footsteps/`, with playback in `footsteps.js`.
