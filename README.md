@@ -50,3 +50,7 @@ Island progress is stored in the browser on the current device. This is a browse
 ## Footstep audio
 
 Eight original synthesized gravel WAV variations play with player walking distance (two steps per walk cycle), without consecutive sample repeats. Audio unlocks on a key press or tap. Footsteps stop while idle, blocked, rolling, attacking, casting, paused, or sailing; walking during boarding also uses these gravel samples. Files are in `assets/audio/footsteps/`, with playback in `footsteps.js`.
+
+## Sword audio
+
+Four synthesized slash WAV variations in `assets/audio/sword/` play once per accepted J/mobile sword attack, avoiding consecutive repeats. Cancelling into a roll, pausing, or leaving the tab stops the sound. `sword-audio.js` preloads the clips; playback errors do not block combat.
